@@ -2,11 +2,11 @@
   "private": true,
   "scripts": {
     "postinstall": "run-s prepare.*",
-    "prepare.nitro": "nitro prepare",
     "prepare.cp-env": "[ -f .dev.vars ] || cp .dev.vars.example .dev.vars",
-    "build": "nitro build",
-    "dev": "nitro dev",
-    "preview": "node .output/server/index.mjs",
+    "prepare.nitro": "nitro prepare",
+    "build": "dotenv -e .dev.vars -- nitro build",
+    "dev": "dotenv -e .dev.vars -- nitro dev",
+    "preview": "dotenv -e .dev.vars -- node .output/server/index.mjs",
     "db:generate": "run-s db:generate.*",
     "db:generate.rm": "rimraf .cache/.migrations",
     "db:generate.drizzle": "env-cmd -f .dev.vars drizzle-kit generate --config=./drizzle.config.ts",
@@ -16,6 +16,7 @@
   },
   "devDependencies": {
     "@binochoi/eslint-config-typescript": "^0.0.25",
+    "dotenv-cli": "^9.0.0",
     "env-cmd": "^10.1.0",
     "eslint": "9.0.0",
     "globals": "^15.15.0",
