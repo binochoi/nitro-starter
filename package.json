@@ -8,6 +8,9 @@
     "build": "dotenv -e .dev.vars -- nitro build",
     "dev": "dotenv -e .dev.vars -- nitro dev",
     "preview": "dotenv -e .dev.vars -- node .output/server/index.mjs",
+    "lint": "run-s lint.only",
+    "lint.only": "biome check ./src",
+    "lint.format": "biome lint ./src",
     "db:generate": "run-s db:generate.*",
     "db:generate.rm": "rimraf .cache/.migrations",
     "db:generate.drizzle": "env-cmd -f .dev.vars drizzle-kit generate --config=./drizzle.config.ts",
@@ -16,10 +19,9 @@
     "db:migrate.push": "env-cmd -f .dev.vars drizzle-kit push"
   },
   "devDependencies": {
-    "@binochoi/eslint-config-typescript": "^0.0.25",
+    "@biomejs/biome": "^2.1.2",
     "dotenv-cli": "^9.0.0",
     "env-cmd": "^10.1.0",
-    "eslint": "9.0.0",
     "globals": "^15.15.0",
     "nitro-cloudflare-dev": "^0.2.1",
     "nitropack": "latest",
