@@ -2,7 +2,8 @@
   "private": true,
   "scripts": {
     "postinstall": "run-s prepare.*",
-    "prepare.cp-env": "[ -f .dev.vars ] || cp .dev.vars.example .dev.vars",
+    "prepare.cp-env": "cp .dev.vars.example .dev.vars",
+    "prepare.mkcert": "mkcert localhost",
     "prepare.nitro": "nitro prepare",
     "build": "dotenv -e .dev.vars -- nitro build",
     "dev": "dotenv -e .dev.vars -- nitro dev",
