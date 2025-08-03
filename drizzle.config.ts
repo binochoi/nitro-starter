@@ -1,5 +1,5 @@
 import { defineConfig } from "drizzle-kit";
-import { useBuildtimeConfig } from "~/config";
+import { useBuildtimeConfig } from "server/config";
 
 export default defineConfig({
 	dialect: "postgresql",

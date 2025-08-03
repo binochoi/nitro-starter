@@ -18,13 +18,23 @@ export default defineNitroConfig({
 				verbatimModuleSyntax: false,
 				moduleResolution: "bundler",
 				paths: {
-					server: [fileURLToPath(new URL("src/server", import.meta.url))],
+					'server/*': [fileURLToPath(new URL("src/*", import.meta.url))],
 				},
 			},
 		},
 	},
+	hooks: {
+		"types:extend"({ tsConfig }) {
+			const aliasesToRemoveFromAutocomplete = ['~', '~/*', '~~', '~~/*', '@', '@/*', '@@', '@@/*']
+			for (const alias of aliasesToRemoveFromAutocomplete) {
+				if (tsConfig?.compilerOptions?.paths[alias]) {
+					delete tsConfig?.compilerOptions.paths[alias]
+				}
+			}
+		}
+	},
 	alias: {
-		server: fileURLToPath(new URL("src/server", import.meta.url)),
+		server: fileURLToPath(new URL("./src", import.meta.url)),
 	},
 
 	logLevel: 4,
