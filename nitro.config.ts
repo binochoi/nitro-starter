@@ -18,13 +18,13 @@ export default defineNitroConfig({
 				verbatimModuleSyntax: false,
 				moduleResolution: "bundler",
 				paths: {
-					server: [fileURLToPath(new URL("../admin/server", import.meta.url))],
+					server: [fileURLToPath(new URL("src/server", import.meta.url))],
 				},
 			},
 		},
 	},
 	alias: {
-		server: fileURLToPath(new URL("../admin/server", import.meta.url)),
+		server: fileURLToPath(new URL("src/server", import.meta.url)),
 	},
 
 	logLevel: 4,
